@@ -24,8 +24,8 @@ const SectionForm = ({
   <>
     <form
       className='bg-white rounded-xl shadow p-8 min-w-[350px] max-w-md mx-auto'
-      onSubmit={(e) => {
-        e.preventDefault()
+      onSubmit={(event) => {
+        event.preventDefault()
         onSubmit()
       }}
     >
@@ -45,8 +45,8 @@ const SectionForm = ({
               type={field.type === 'NUMBER' ? 'number' : 'text'}
               className='w-full border border-gray-300 rounded px-3 py-2 bg-gray-50 text-base text-black'
               value={values[`${section.order}-${index}`] ?? ''}
-              onChange={(e) =>
-                onChange(`${section.order}-${index}`, e.target.value)
+              onChange={(event) =>
+                onChange(`${section.order}-${index}`, event.target.value)
               }
               placeholder={field.label}
               required

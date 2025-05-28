@@ -17,14 +17,14 @@ const AddSection = ({ sections, setSections }: AddSectionProps) => {
         className='border border-gray-300 rounded px-2 py-1 flex-1 text-base'
         placeholder='Section title'
         value={newSectionTitle}
-        onChange={(e) => setNewSectionTitle(e.target.value)}
+        onChange={(event) => setNewSectionTitle(event.target.value)}
         required
       />
       <input
         className='border border-gray-300 rounded px-2 py-1 flex-1 text-base'
         placeholder='Section description (optional)'
         value={newSectionDescription}
-        onChange={(e) => setNewSectionDescription(e.target.value)}
+        onChange={(event) => setNewSectionDescription(event.target.value)}
       />
       <button
         className='bg-green-800 text-white rounded px-4 py-1 font-semibold mt-2 sm:mt-0 cursor-pointer'

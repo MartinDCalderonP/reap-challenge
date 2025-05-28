@@ -39,7 +39,7 @@ const AdminLoginPage = () => {
             type='text'
             placeholder='Username'
             value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={(event) => setUsername(event.target.value)}
             required
           />
           <input
@@ -47,7 +47,7 @@ const AdminLoginPage = () => {
             type='password'
             placeholder='Password'
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(event) => setPassword(event.target.value)}
             required
           />
           <button

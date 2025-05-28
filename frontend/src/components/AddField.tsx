@@ -17,14 +17,14 @@ const AddField = ({ onAdd }: AddFieldProps) => {
         className='border border-gray-300 rounded px-2 py-1 flex-1 text-base'
         placeholder='Field label'
         value={label}
-        onChange={(e) => setLabel(e.target.value)}
+        onChange={(event) => setLabel(event.target.value)}
         required
       />
 
       <select
         className='border border-gray-300 rounded px-2 py-1 text-base'
         value={type}
-        onChange={(e) => setType(e.target.value as FieldType)}
+        onChange={(event) => setType(event.target.value as FieldType)}
         required
       >
         {FieldTypes.map((fieldType) => (

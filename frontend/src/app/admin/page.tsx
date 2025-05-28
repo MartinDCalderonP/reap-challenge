@@ -41,7 +41,7 @@ const AdminPage = () => {
         className='border border-gray-300 rounded px-3 py-2 w-full mb-4 text-base'
         placeholder='Form name'
         value={formName}
-        onChange={(e) => setFormName(e.target.value)}
+        onChange={(event) => setFormName(event.target.value)}
         required
       />
 
