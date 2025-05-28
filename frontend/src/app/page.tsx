@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, type ChangeEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import useAdminLogin from '@/hooks/useAdminLogin'
 import Loader from '@/components/Loader'
@@ -27,6 +27,27 @@ const AdminLoginPage = () => {
 
   if (pageLoading) return <Loader />
 
+  const formInputs = [
+    {
+      type: 'text',
+      placeholder: 'Username',
+      value: username,
+      onChange: (event: ChangeEvent<HTMLInputElement>) =>
+        setUsername(event.target.value),
+      required: true,
+      name: 'username'
+    },
+    {
+      type: 'password',
+      placeholder: 'Password',
+      value: password,
+      onChange: (event: ChangeEvent<HTMLInputElement>) =>
+        setPassword(event.target.value),
+      required: true,
+      name: 'password'
+    }
+  ]
+
   return (
     <div className='flex flex-col items-center justify-center min-h-screen bg-[#f7f8f6]'>
       <div className='bg-white rounded-xl shadow p-8 min-w-[350px]'>
@@ -34,22 +55,13 @@ const AdminLoginPage = () => {
           Admin Login
         </h1>
         <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
-          <input
-            className='border border-gray-300 rounded px-3 py-2 w-full bg-gray-50 text-base text-black'
-            type='text'
-            placeholder='Username'
-            value={username}
-            onChange={(event) => setUsername(event.target.value)}
-            required
-          />
-          <input
-            className='border border-gray-300 rounded px-3 py-2 w-full bg-gray-50 text-base text-black'
-            type='password'
-            placeholder='Password'
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-            required
-          />
+          {formInputs.map((input) => (
+            <input
+              key={input.name}
+              className='border border-gray-300 rounded px-3 py-2 w-full text-base focus:outline-none focus:ring-2 focus:ring-green-500'
+              {...input}
+            />
+          ))}
           <button
             className='w-full bg-green-800 text-white font-semibold rounded py-3 text-lg mt-2 transition-colors active:bg-green-900 disabled:opacity-60'
             type='submit'
