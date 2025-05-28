@@ -1,9 +1,12 @@
 import useAddField from '../hooks/useAddField'
 import type { Field, FieldType } from '@/types'
+import { capitalize } from '@/utils'
 
 interface AddFieldProps {
   onAdd: (field: Field) => void
 }
+
+const FieldTypes: FieldType[] = ['TEXT', 'NUMBER']
 
 const AddField = ({ onAdd }: AddFieldProps) => {
   const { label, setLabel, type, setType, handleAdd } = useAddField({ onAdd })
@@ -17,15 +20,20 @@ const AddField = ({ onAdd }: AddFieldProps) => {
         onChange={(e) => setLabel(e.target.value)}
         required
       />
+
       <select
         className='border border-gray-300 rounded px-2 py-1 text-base'
         value={type}
         onChange={(e) => setType(e.target.value as FieldType)}
         required
       >
-        <option value='TEXT'>Text</option>
-        <option value='NUMBER'>Number</option>
+        {FieldTypes.map((fieldType) => (
+          <option key={fieldType} value={fieldType}>
+            {capitalize(fieldType)}
+          </option>
+        ))}
       </select>
+
       <button
         className='bg-gray-700 text-white rounded px-3 py-1 font-semibold mt-2 sm:mt-0 cursor-pointer'
         type='button'
