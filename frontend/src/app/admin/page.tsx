@@ -13,7 +13,9 @@ import useAdminRedirect from '@/hooks/useAdminRedirect'
 const AdminPage = () => {
   const [pageLoading, setPageLoading] = useState(true)
   const [formName, setFormName] = useState('')
-  const { sections, setSections } = useSections({ initialSections: [] })
+  const { sections, addSection, addField } = useSections({
+    initialSections: []
+  })
   const { link, error, loading, handleCreateForm } = useCreateForm({
     formName,
     sections
@@ -41,9 +43,9 @@ const AdminPage = () => {
         className='w-full mb-4'
       />
 
-      <SectionList sections={sections} setSections={setSections} />
+      <SectionList sections={sections} addField={addField} />
 
-      <AddSection sections={sections} setSections={setSections} />
+      <AddSection addSection={addSection} />
 
       {error && <div className='text-red-500 mb-2 text-center'>{error}</div>}
 

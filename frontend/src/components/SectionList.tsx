@@ -1,12 +1,12 @@
 import AddField from '@/components/AddField'
-import type { Section } from '@/types'
+import type { Section, Field } from '@/types'
 
 interface SectionListProps {
   sections: Section[]
-  setSections: (s: Section[]) => void
+  addField: (sectionIndex: number, field: Field) => boolean
 }
 
-const SectionList = ({ sections, setSections }: SectionListProps) => (
+const SectionList = ({ sections, addField }: SectionListProps) => (
   <div className='mb-4'>
     <div className='font-medium mb-2'>Sections</div>
 
@@ -21,30 +21,14 @@ const SectionList = ({ sections, setSections }: SectionListProps) => (
         )}
 
         <div className='ml-2'>
-          {section.fields.map((field) => (
+          {section.fields.map((field: Field) => (
             <div key={field.label} className='text-sm text-gray-700'>
               {field.label} ({field.type.toLowerCase()})
             </div>
           ))}
         </div>
 
-        <AddField
-          onAdd={(field) => {
-            setSections(
-              sections.map((section, index) =>
-                index === sectionIndex
-                  ? {
-                      ...section,
-                      fields: [
-                        ...section.fields,
-                        { ...field, order: section.fields.length }
-                      ]
-                    }
-                  : section
-              )
-            )
-          }}
-        />
+        <AddField addField={addField} sectionIndex={sectionIndex} />
       </div>
     ))}
   </div>

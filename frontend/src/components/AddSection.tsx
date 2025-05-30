@@ -1,16 +1,14 @@
 'use client'
 
 import { useState } from 'react'
-import type { Section } from '@/types'
 import Input from './Input'
 import Button from './Button'
 
 interface AddSectionProps {
-  sections: Section[]
-  setSections: (section: Section[]) => void
+  addSection: (title: string, description?: string) => boolean
 }
 
-const AddSection = ({ sections, setSections }: AddSectionProps) => {
+const AddSection = ({ addSection }: AddSectionProps) => {
   const [newSectionTitle, setNewSectionTitle] = useState('')
   const [newSectionDescription, setNewSectionDescription] = useState('')
 
@@ -32,16 +30,7 @@ const AddSection = ({ sections, setSections }: AddSectionProps) => {
       <Button
         type='button'
         onClick={() => {
-          if (newSectionTitle.trim()) {
-            setSections([
-              ...sections,
-              {
-                title: newSectionTitle,
-                description: newSectionDescription,
-                order: sections.length,
-                fields: []
-              }
-            ])
+          if (addSection(newSectionTitle, newSectionDescription)) {
             setNewSectionTitle('')
             setNewSectionDescription('')
           }

@@ -11,7 +11,7 @@ export const useSections = ({ initialSections }: UseSectionsParams) => {
   const [sections, setSections] = useState<Section[]>(initialSections)
 
   const addSection = (title: string, description?: string) => {
-    if (!title.trim()) return
+    if (!title.trim()) return false
 
     setSections([
       ...sections,
@@ -22,9 +22,12 @@ export const useSections = ({ initialSections }: UseSectionsParams) => {
         fields: []
       }
     ])
+    return true
   }
 
   const addField = (sectionIndex: number, field: Field) => {
+    if (!field.label.trim()) return false
+
     setSections(
       sections.map((section, index) =>
         index === sectionIndex
@@ -41,6 +44,7 @@ export const useSections = ({ initialSections }: UseSectionsParams) => {
           : section
       )
     )
+    return true
   }
 
   return { sections, setSections, addSection, addField }
