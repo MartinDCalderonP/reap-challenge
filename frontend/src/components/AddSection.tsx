@@ -7,7 +7,7 @@ import Button from './Button'
 
 interface AddSectionProps {
   sections: Section[]
-  setSections: (s: Section[]) => void
+  setSections: (section: Section[]) => void
 }
 
 const AddSection = ({ sections, setSections }: AddSectionProps) => {
