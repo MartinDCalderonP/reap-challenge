@@ -3,9 +3,9 @@
 import { useState, useEffect } from 'react'
 import { useSections } from '@/hooks/useSections'
 import { useCreateForm } from '@/hooks/useCreateForm'
+import { useRouter } from 'next/navigation'
 import SectionList from '@/components/SectionList'
 import AddSection from '@/components/AddSection'
-import { useRouter } from 'next/navigation'
 import Loader from '@/components/Loader'
 import Input from '@/components/Input'
 import Button from '@/components/Button'
@@ -19,10 +19,6 @@ const AdminPage = () => {
     formName,
     sections
   })
-
-  const handleCreate = () => {
-    handleCreateForm()
-  }
 
   useEffect(() => {
     const token = localStorage.getItem('adminToken')
@@ -55,7 +51,7 @@ const AdminPage = () => {
 
       <Button
         type='button'
-        onClick={handleCreate}
+        onClick={handleCreateForm}
         disabled={loading}
         fullWidth
         className='mt-2 mb-4'
