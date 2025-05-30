@@ -1,17 +1,16 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useSections } from '@/hooks/useSections'
 import { useCreateForm } from '@/hooks/useCreateForm'
-import { useRouter } from 'next/navigation'
 import SectionList from '@/components/SectionList'
 import AddSection from '@/components/AddSection'
 import Loader from '@/components/Loader'
 import Input from '@/components/Input'
 import Button from '@/components/Button'
+import useAdminRedirect from '@/hooks/useAdminRedirect'
 
 const AdminPage = () => {
-  const router = useRouter()
   const [pageLoading, setPageLoading] = useState(true)
   const [formName, setFormName] = useState('')
   const { sections, setSections } = useSections({ initialSections: [] })
@@ -20,12 +19,11 @@ const AdminPage = () => {
     sections
   })
 
-  useEffect(() => {
-    const token = localStorage.getItem('adminToken')
-
-    if (!token) router.replace('/')
-    else setPageLoading(false)
-  }, [router])
+  useAdminRedirect({
+    setPageLoading,
+    redirectIf: (token) => !token,
+    redirectTo: '/'
+  })
 
   if (pageLoading) return <Loader />
 

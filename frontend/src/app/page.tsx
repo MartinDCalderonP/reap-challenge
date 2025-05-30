@@ -18,7 +18,11 @@ const AdminLoginPage = () => {
     username
   } = useAdminLogin()
 
-  useAdminRedirect({ setPageLoading })
+  useAdminRedirect({
+    setPageLoading,
+    redirectIf: (token) => !!token,
+    redirectTo: '/admin'
+  })
 
   if (pageLoading) return <Loader />
 
