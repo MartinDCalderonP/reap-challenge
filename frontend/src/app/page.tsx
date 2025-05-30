@@ -1,29 +1,24 @@
 'use client'
 
-import { useState, useEffect, type ChangeEvent } from 'react'
-import { useRouter } from 'next/navigation'
+import { useState, type ChangeEvent } from 'react'
 import useAdminLogin from '@/hooks/useAdminLogin'
 import Loader from '@/components/Loader'
+import useAdminRedirect from '@/hooks/useAdminRedirect'
 
 const AdminLoginPage = () => {
   const [pageLoading, setPageLoading] = useState(true)
-  const router = useRouter()
+
   const {
-    username,
-    setUsername,
+    error,
+    handleSubmit,
+    loading,
     password,
     setPassword,
-    error,
-    loading,
-    handleSubmit
+    setUsername,
+    username
   } = useAdminLogin()
 
-  useEffect(() => {
-    const token = localStorage.getItem('adminToken')
-
-    if (token) router.replace('/admin')
-    else setPageLoading(false)
-  }, [router])
+  useAdminRedirect({ setPageLoading })
 
   if (pageLoading) return <Loader />
 
@@ -54,6 +49,7 @@ const AdminLoginPage = () => {
         <h1 className='text-2xl font-bold mb-6 text-center text-gray-900'>
           Admin Login
         </h1>
+
         <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
           {formInputs.map((input) => (
             <input
@@ -62,6 +58,7 @@ const AdminLoginPage = () => {
               {...input}
             />
           ))}
+
           <button
             className='w-full bg-green-800 text-white font-semibold rounded py-3 text-lg mt-2 transition-colors active:bg-green-900 disabled:opacity-60'
             type='submit'
@@ -69,6 +66,7 @@ const AdminLoginPage = () => {
           >
             {loading ? 'Logging in...' : 'Login'}
           </button>
+
           {error && (
             <div className='text-red-500 text-center mt-2'>{error}</div>
           )}
