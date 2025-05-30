@@ -1,6 +1,8 @@
 import useAddField from '../hooks/useAddField'
 import type { Field, FieldType } from '@/types'
 import { capitalize } from '@/utils'
+import Input from './Input'
+import Button from './Button'
 
 interface AddFieldProps {
   onAdd: (field: Field) => void
@@ -13,12 +15,12 @@ const AddField = ({ onAdd }: AddFieldProps) => {
 
   return (
     <div className='flex gap-2 mt-2 flex-col sm:flex-row'>
-      <input
-        className='border border-gray-300 rounded px-2 py-1 flex-1 text-base'
+      <Input
         placeholder='Field label'
         value={label}
         onChange={(event) => setLabel(event.target.value)}
         required
+        className='flex-1'
       />
 
       <select
@@ -34,13 +36,14 @@ const AddField = ({ onAdd }: AddFieldProps) => {
         ))}
       </select>
 
-      <button
-        className='bg-gray-700 text-white rounded px-3 py-1 font-semibold mt-2 sm:mt-0 cursor-pointer'
+      <Button
         type='button'
         onClick={handleAdd}
+        className='mt-2 sm:mt-0'
+        color='secondary'
       >
         Add Field
-      </button>
+      </Button>
     </div>
   )
 }

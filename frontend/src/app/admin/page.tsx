@@ -7,6 +7,8 @@ import SectionList from '@/components/SectionList'
 import AddSection from '@/components/AddSection'
 import { useRouter } from 'next/navigation'
 import Loader from '@/components/Loader'
+import Input from '@/components/Input'
+import Button from '@/components/Button'
 
 const AdminPage = () => {
   const router = useRouter()
@@ -37,12 +39,12 @@ const AdminPage = () => {
         Create New Form
       </div>
 
-      <input
-        className='border border-gray-300 rounded px-3 py-2 w-full mb-4 text-base'
+      <Input
         placeholder='Form name'
         value={formName}
         onChange={(event) => setFormName(event.target.value)}
         required
+        className='w-full mb-4'
       />
 
       <SectionList sections={sections} setSections={setSections} />
@@ -51,14 +53,15 @@ const AdminPage = () => {
 
       {error && <div className='text-red-500 mb-2 text-center'>{error}</div>}
 
-      <button
-        className='cursor-pointer w-full bg-green-800 text-white font-semibold rounded py-3 text-lg mt-2 mb-4 disabled:opacity-60 disabled:cursor-not-allowed'
+      <Button
         type='button'
         onClick={handleCreate}
         disabled={loading}
+        fullWidth
+        className='mt-2 mb-4'
       >
-        {loading ? 'Creating...' : 'Create Form & Generate Link'}
-      </button>
+        {loading ? 'Creating...' : 'Create Form'}
+      </Button>
 
       {link && (
         <div className='bg-green-50 border border-green-200 rounded p-4 mt-4 text-center break-words'>

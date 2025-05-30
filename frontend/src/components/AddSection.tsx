@@ -2,6 +2,8 @@
 
 import { useState } from 'react'
 import type { Section } from '@/types'
+import Input from './Input'
+import Button from './Button'
 
 interface AddSectionProps {
   sections: Section[]
@@ -11,23 +13,23 @@ interface AddSectionProps {
 const AddSection = ({ sections, setSections }: AddSectionProps) => {
   const [newSectionTitle, setNewSectionTitle] = useState('')
   const [newSectionDescription, setNewSectionDescription] = useState('')
+
   return (
     <div className='flex gap-2 mt-2 flex-col sm:flex-row'>
-      <input
-        className='border border-gray-300 rounded px-2 py-1 flex-1 text-base'
+      <Input
         placeholder='Section title'
         value={newSectionTitle}
         onChange={(event) => setNewSectionTitle(event.target.value)}
         required
+        className='flex-1'
       />
-      <input
-        className='border border-gray-300 rounded px-2 py-1 flex-1 text-base'
+      <Input
         placeholder='Section description (optional)'
         value={newSectionDescription}
         onChange={(event) => setNewSectionDescription(event.target.value)}
+        className='flex-1'
       />
-      <button
-        className='bg-green-800 text-white rounded px-4 py-1 font-semibold mt-2 sm:mt-0 cursor-pointer'
+      <Button
         type='button'
         onClick={() => {
           if (newSectionTitle.trim()) {
@@ -44,9 +46,10 @@ const AddSection = ({ sections, setSections }: AddSectionProps) => {
             setNewSectionDescription('')
           }
         }}
+        className='mt-2 sm:mt-0'
       >
         Add Section
-      </button>
+      </Button>
     </div>
   )
 }
