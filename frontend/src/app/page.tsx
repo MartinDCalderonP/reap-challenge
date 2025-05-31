@@ -4,6 +4,8 @@ import { useState, type ChangeEvent } from 'react'
 import useAdminLogin from '@/hooks/useAdminLogin'
 import Loader from '@/components/Loader'
 import useAdminRedirect from '@/hooks/useAdminRedirect'
+import Input from '@/components/Input'
+import Button from '@/components/Button'
 
 const AdminLoginPage = () => {
   const [pageLoading, setPageLoading] = useState(true)
@@ -56,20 +58,18 @@ const AdminLoginPage = () => {
 
         <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
           {formInputs.map((input) => (
-            <input
-              key={input.name}
-              className='border border-gray-300 rounded px-3 py-2 w-full text-base focus:outline-none focus:ring-2 focus:ring-green-500'
-              {...input}
-            />
+            <Input key={input.name} {...input} />
           ))}
 
-          <button
-            className='w-full bg-green-800 text-white font-semibold rounded py-3 text-lg mt-2 transition-colors active:bg-green-900 disabled:opacity-60'
-            type='submit'
+          <Button
+            className='w-full mt-2'
+            color='primary'
             disabled={loading}
+            fullWidth
+            type='submit'
           >
             {loading ? 'Logging in...' : 'Login'}
-          </button>
+          </Button>
 
           {error && (
             <div className='text-red-500 text-center mt-2'>{error}</div>
