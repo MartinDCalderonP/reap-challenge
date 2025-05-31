@@ -40,7 +40,7 @@ const AddField = ({ addField, sectionIndex }: AddFieldProps) => {
       >
         {FieldTypes.map((fieldType) => (
           <option key={fieldType} value={fieldType}>
-            {capitalize(fieldType)}
+            {capitalize({ string: fieldType })}
           </option>
         ))}
       </select>
