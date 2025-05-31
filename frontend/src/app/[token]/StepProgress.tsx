@@ -23,6 +23,7 @@ const StepProgress = ({ steps, currentStep }: StepProgressProps) => (
               }`}
             />
           </div>
+
           <span
             className={`text-xs md:text-sm text-center ${
               index === currentStep
@@ -32,10 +33,12 @@ const StepProgress = ({ steps, currentStep }: StepProgressProps) => (
           >
             {title}
           </span>
+
           <span className='text-xs text-gray-400 text-center mt-0.5'>
             {subtitle}
           </span>
         </div>
+
         {index < steps.length - 1 && (
           <div className='w-10 h-0.5 bg-gray-300 mx-2' />
         )}
