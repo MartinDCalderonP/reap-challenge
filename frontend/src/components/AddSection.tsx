@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { type ChangeEvent, useState } from 'react'
 import Input from './Input'
 import Button from './Button'
 
@@ -12,21 +12,36 @@ const AddSection = ({ addSection }: AddSectionProps) => {
   const [newSectionTitle, setNewSectionTitle] = useState('')
   const [newSectionDescription, setNewSectionDescription] = useState('')
 
+  const inputs = [
+    {
+      className: 'flex-1',
+      onChange: (event: ChangeEvent<HTMLInputElement>) =>
+        setNewSectionTitle(event.target.value),
+      placeholder: 'Section title',
+      value: newSectionTitle,
+      required: true
+    },
+    {
+      className: 'flex-1',
+      onChange: (event: ChangeEvent<HTMLInputElement>) =>
+        setNewSectionDescription(event.target.value),
+      placeholder: 'Section description (optional)',
+      value: newSectionDescription
+    }
+  ]
+
   return (
     <div className='flex gap-2 mt-2 flex-col sm:flex-row'>
-      <Input
-        placeholder='Section title'
-        value={newSectionTitle}
-        onChange={(event) => setNewSectionTitle(event.target.value)}
-        required
-        className='flex-1'
-      />
-      <Input
-        placeholder='Section description (optional)'
-        value={newSectionDescription}
-        onChange={(event) => setNewSectionDescription(event.target.value)}
-        className='flex-1'
-      />
+      {inputs.map(({ className, onChange, placeholder, required, value }) => (
+        <Input
+          className={className}
+          key={placeholder}
+          onChange={onChange}
+          placeholder={placeholder}
+          required={required}
+          value={value}
+        />
+      ))}
       <Button
         type='button'
         onClick={() => {
