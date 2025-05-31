@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { type ChangeEvent, useState } from 'react'
 import useSections from '@/hooks/useSections'
 import useCreateForm from '@/hooks/useCreateForm'
 import SectionList from '@/components/SectionList'
@@ -31,25 +31,40 @@ const AdminPage = () => {
 
   if (pageLoading) return <Loader />
 
+  const inputs = [
+    {
+      className: 'w-full mb-4',
+      onChange: (event: ChangeEvent<HTMLInputElement>) =>
+        setFormName(event.target.value),
+      placeholder: 'Form name',
+      required: true,
+      value: formName
+    },
+    {
+      className: 'w-full mb-4',
+      onChange: (event: ChangeEvent<HTMLInputElement>) =>
+        setFormDescription(event.target.value),
+      placeholder: 'Form description (optional)',
+      value: formDescription
+    }
+  ]
+
   return (
     <div className='max-w-2xl mx-auto py-6 px-2 sm:px-0 text-black'>
       <div className='text-2xl font-semibold mb-6 text-center'>
         Create New Form
       </div>
 
-      <Input
-        placeholder='Form name'
-        value={formName}
-        onChange={(event) => setFormName(event.target.value)}
-        required
-        className='w-full mb-4'
-      />
-      <Input
-        placeholder='Form description (optional)'
-        value={formDescription}
-        onChange={(event) => setFormDescription(event.target.value)}
-        className='w-full mb-4'
-      />
+      {inputs.map(({ className, onChange, placeholder, required, value }) => (
+        <Input
+          key={placeholder}
+          className={className}
+          onChange={onChange}
+          placeholder={placeholder}
+          required={required}
+          value={value}
+        />
+      ))}
 
       <SectionList sections={sections} addField={addField} />
 
