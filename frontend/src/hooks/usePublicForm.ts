@@ -2,10 +2,13 @@
 
 import { useState, useEffect } from 'react'
 import type { Form } from '@/types'
+import { apiFetch } from '@/utils/api'
 
 interface UsePublicFormParams {
   token: string
 }
+
+const publicUrl = '/api/public/form'
 
 const usePublicForm = ({ token }: UsePublicFormParams) => {
   const [form, setForm] = useState<Form | null>(null)
@@ -15,12 +18,14 @@ const usePublicForm = ({ token }: UsePublicFormParams) => {
   const [submitted, setSubmitted] = useState(false)
   const [step, setStep] = useState(0)
 
+  const fetchUrl = `${publicUrl}/${token}`
+
   useEffect(() => {
     const fetchForm = async () => {
       setLoading(true)
       setError('')
       try {
-        const res = await fetch(`/api/public/form/${token}`)
+        const res = await apiFetch({ url: fetchUrl })
         const data = await res.json()
         if (!data.success || !data.form) {
           setError('Form not found or invalid token.')
@@ -50,10 +55,12 @@ const usePublicForm = ({ token }: UsePublicFormParams) => {
   const handleSubmit = async () => {
     setError('')
     try {
-      const res = await fetch(`/api/public/form/${token}/submit`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(values)
+      const res = await apiFetch({
+        url: `${fetchUrl}/submit`,
+        options: {
+          method: 'POST',
+          body: values
+        }
       })
       const data = await res.json()
       if (data.success) setSubmitted(true)

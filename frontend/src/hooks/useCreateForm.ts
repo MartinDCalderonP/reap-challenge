@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import type { Section } from '@/types'
+import { apiFetch } from '@/utils/api'
 
 interface UseCreateFormParams {
   formName: string
@@ -28,36 +29,42 @@ const useCreateForm = ({
 
     setLoading(true)
 
+    const fetchUrl = '/api/admin/forms'
+
     try {
-      const res = await fetch('/api/admin/forms', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: localStorage.getItem('adminToken') ?? ''
-        },
-        body: JSON.stringify({
-          name: formName,
-          description: formDescription,
-          sections: sections.map((section, index) => ({
-            title: section.title,
-            description: section.description,
-            order: index,
-            fields: section.fields.map((field, fieldIndex) => ({
-              ...field,
-              order: fieldIndex
+      const res = await apiFetch({
+        url: fetchUrl,
+        options: {
+          method: 'POST',
+          headers: {
+            Authorization: localStorage.getItem('adminToken') ?? ''
+          },
+          body: {
+            name: formName,
+            description: formDescription,
+            sections: sections.map((section, index) => ({
+              title: section.title,
+              description: section.description,
+              order: index,
+              fields: section.fields.map((field, fieldIndex) => ({
+                ...field,
+                order: fieldIndex
+              }))
             }))
-          }))
-        })
+          }
+        }
       })
 
       const data = await res.json()
 
       if (data.success && data.form) {
-        const tokenRes = await fetch(`/api/admin/forms/${data.form.id}/token`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: localStorage.getItem('adminToken') ?? ''
+        const tokenRes = await apiFetch({
+          url: `${fetchUrl}/${data.form.id}/token`,
+          options: {
+            method: 'POST',
+            headers: {
+              Authorization: localStorage.getItem('adminToken') ?? ''
+            }
           }
         })
 

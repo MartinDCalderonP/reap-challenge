@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
+import { apiFetch } from '@/utils/api'
 
 const useAdminLogin = () => {
   const [username, setUsername] = useState('')
@@ -13,16 +14,17 @@ const useAdminLogin = () => {
     setError('')
     setLoading(true)
 
+    const fetchUrl = '/api/admin/login'
+
     try {
-      const res = await fetch('/api/admin/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          username,
-          password
-        })
+      const res = await apiFetch({
+        url: fetchUrl,
+        options: {
+          method: 'POST',
+          body: { username, password }
+        }
       })
-      
+
       const data = await res.json()
 
       if (data.success && data.token) {
