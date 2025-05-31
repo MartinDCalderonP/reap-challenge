@@ -1,9 +1,9 @@
 'use client'
 
 import React, { use } from 'react'
-import Header from './Header'
-import StepProgress from './StepProgress'
-import SectionForm from './SectionForm'
+import Header from '../../components/Header'
+import StepProgress from '../../components/StepProgress'
+import SectionForm from '../../components/SectionForm'
 import usePublicForm from '@/hooks/usePublicForm'
 import Image from 'next/image'
 import Loader from '@/components/Loader'
