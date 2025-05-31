@@ -43,10 +43,6 @@ export async function POST(
   const body = await req.text()
   const headers: Record<string, string> = {}
 
-  req.headers.forEach((value, key) => {
-    headers[key] = value
-  })
-
   const res = await apiFetch({
     url,
     options: {
@@ -57,7 +53,7 @@ export async function POST(
   })
 
   const data = await res.text()
-  
+
   return new NextResponse(data, {
     status: res.status,
     headers: {
