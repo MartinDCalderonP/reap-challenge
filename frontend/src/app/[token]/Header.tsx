@@ -3,9 +3,10 @@ import Image from 'next/image'
 
 interface HeaderProps {
   formName: string
+  formDescription?: string
 }
 
-const Header = ({ formName }: HeaderProps) => (
+const Header = ({ formName, formDescription }: HeaderProps) => (
   <header className='flex flex-col items-center my-8'>
     <Image
       src='/Logo.jpeg'
@@ -19,10 +20,11 @@ const Header = ({ formName }: HeaderProps) => (
       {formName}
     </h1>
 
-    <p className='text-gray-600 text-center max-w-xl mb-2'>
-      Please use this secure form to provide Resident information and documents
-      to upload to the Resident Profile of James Wilson
-    </p>
+    {formDescription && (
+      <p className='text-gray-600 text-center max-w-xl mb-2'>
+        {formDescription}
+      </p>
+    )}
   </header>
 )
 

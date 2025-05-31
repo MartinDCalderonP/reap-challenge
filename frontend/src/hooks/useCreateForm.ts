@@ -5,10 +5,15 @@ import type { Section } from '@/types'
 
 interface UseCreateFormParams {
   formName: string
+  formDescription?: string
   sections: Section[]
 }
 
-export function useCreateForm({ formName, sections }: UseCreateFormParams) {
+export function useCreateForm({
+  formName,
+  formDescription,
+  sections
+}: UseCreateFormParams) {
   const [link, setLink] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
@@ -32,6 +37,7 @@ export function useCreateForm({ formName, sections }: UseCreateFormParams) {
         },
         body: JSON.stringify({
           name: formName,
+          description: formDescription,
           sections: sections.map((section, index) => ({
             title: section.title,
             description: section.description,

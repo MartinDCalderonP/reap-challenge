@@ -27,5 +27,6 @@ export interface FormSectionResponse {
 
 export interface CreateFormRequestBody {
   name: string
+  description?: string
   sections: FormSectionInput[]
 }

@@ -73,7 +73,7 @@ adminRouter.post('/forms/:id/token', async (req, res) => {
 
 adminRouter.post('/forms', async (req, res) => {
   try {
-    const { name, sections } = req.body as CreateFormRequestBody
+    const { name, description, sections } = req.body as CreateFormRequestBody
 
     if (!name || !Array.isArray(sections) || sections.length === 0) {
       res.status(400).json({ success: false, message: 'Invalid form data' })
@@ -95,6 +95,7 @@ adminRouter.post('/forms', async (req, res) => {
     const form = await prisma.form.create({
       data: {
         name,
+        description,
         sections: {
           create: sections.map(
             (section: FormSectionInput, sectionIndex: number) => ({

@@ -13,11 +13,13 @@ import useAdminRedirect from '@/hooks/useAdminRedirect'
 const AdminPage = () => {
   const [pageLoading, setPageLoading] = useState(true)
   const [formName, setFormName] = useState('')
+  const [formDescription, setFormDescription] = useState('')
   const { sections, addSection, addField } = useSections({
     initialSections: []
   })
   const { link, error, loading, handleCreateForm } = useCreateForm({
     formName,
+    formDescription,
     sections
   })
 
@@ -40,6 +42,12 @@ const AdminPage = () => {
         value={formName}
         onChange={(event) => setFormName(event.target.value)}
         required
+        className='w-full mb-4'
+      />
+      <Input
+        placeholder='Form description (optional)'
+        value={formDescription}
+        onChange={(event) => setFormDescription(event.target.value)}
         className='w-full mb-4'
       />
 

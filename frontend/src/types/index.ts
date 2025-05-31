@@ -15,6 +15,7 @@ export interface Section {
 
 export interface Form {
   name: string
+  description?: string
   sections: Section[]
 }
 

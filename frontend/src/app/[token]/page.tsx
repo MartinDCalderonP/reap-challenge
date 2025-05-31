@@ -59,7 +59,7 @@ const PublicFormPage = ({ params }: { params: Promise<{ token: string }> }) => {
 
   return (
     <div className='min-h-screen bg-[#f7f8f6] flex flex-col items-center pb-8'>
-      <Header formName={form.name} />
+      <Header formName={form.name} formDescription={form.description} />
       <StepProgress steps={steps} currentStep={step} />
       <SectionForm
         section={section}
