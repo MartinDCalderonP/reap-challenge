@@ -7,7 +7,7 @@ interface UsePublicFormParams {
   token: string
 }
 
-export const usePublicForm = ({ token }: UsePublicFormParams) => {
+const usePublicForm = ({ token }: UsePublicFormParams) => {
   const [form, setForm] = useState<Form | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
@@ -57,7 +57,7 @@ export const usePublicForm = ({ token }: UsePublicFormParams) => {
       })
       const data = await res.json()
       if (data.success) setSubmitted(true)
-      else setError(data.message || 'Error submitting form.')
+      else setError(data.message ?? 'Error submitting form.')
     } catch {
       setError('Error submitting form.')
     }
@@ -78,3 +78,5 @@ export const usePublicForm = ({ token }: UsePublicFormParams) => {
     handleSubmit
   }
 }
+
+export default usePublicForm

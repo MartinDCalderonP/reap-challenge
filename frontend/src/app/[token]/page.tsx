@@ -4,8 +4,9 @@ import React, { use } from 'react'
 import Header from './Header'
 import StepProgress from './StepProgress'
 import SectionForm from './SectionForm'
-import { usePublicForm } from './usePublicForm'
+import usePublicForm from '@/hooks/usePublicForm'
 import Image from 'next/image'
+import Loader from '@/components/Loader'
 
 const PublicFormPage = ({ params }: { params: Promise<{ token: string }> }) => {
   const { token } = use(params)
@@ -22,18 +23,15 @@ const PublicFormPage = ({ params }: { params: Promise<{ token: string }> }) => {
     handleSubmit
   } = usePublicForm({ token })
 
-  if (loading)
-    return (
-      <div className='bg-[#f7f8f6] flex items-center justify-center min-h-screen text-black'>
-        Loading...
-      </div>
-    )
+  if (loading) return <Loader />
+
   if (error)
     return (
       <div className='bg-[#f7f8f6] flex items-center justify-center min-h-screen text-red-500'>
         {error}
       </div>
     )
+
   if (submitted)
     return (
       <div className='bg-[#f7f8f6] flex flex-col items-center justify-center min-h-screen'>
