@@ -106,7 +106,7 @@ export async function DELETE(
       method: request.method,
       headers: {
         'Content-Type': 'application/json',
-        ...Object.fromEntries(request.headers.entries())
+        Authorization: request.headers.get('authorization') || ''
       }
     }
   })
