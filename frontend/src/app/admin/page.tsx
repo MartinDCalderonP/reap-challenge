@@ -3,7 +3,7 @@
 import { type ChangeEvent, useState } from 'react'
 import useSections from '@/hooks/useSections'
 import useCreateForm from '@/hooks/useCreateForm'
-import SectionList from '@/components/SectionList'
+import SectionList from '@/components/AddSectionsList'
 import AddSection from '@/components/AddSection'
 import Loader from '@/components/Loader'
 import Input from '@/components/Input'
