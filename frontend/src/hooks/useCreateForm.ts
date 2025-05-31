@@ -9,11 +9,11 @@ interface UseCreateFormParams {
   sections: Section[]
 }
 
-export function useCreateForm({
+const useCreateForm = ({
   formName,
   formDescription,
   sections
-}: UseCreateFormParams) {
+}: UseCreateFormParams) => {
   const [link, setLink] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
@@ -82,3 +82,5 @@ export function useCreateForm({
     handleCreateForm
   }
 }
+
+export default useCreateForm

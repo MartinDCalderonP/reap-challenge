@@ -7,7 +7,7 @@ interface UseSectionsParams {
   initialSections: Section[]
 }
 
-export const useSections = ({ initialSections }: UseSectionsParams) => {
+const useSections = ({ initialSections }: UseSectionsParams) => {
   const [sections, setSections] = useState<Section[]>(initialSections)
 
   const addSection = (title: string, description?: string) => {
@@ -49,3 +49,5 @@ export const useSections = ({ initialSections }: UseSectionsParams) => {
 
   return { sections, setSections, addSection, addField }
 }
+
+export default useSections

@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { useSections } from '@/hooks/useSections'
-import { useCreateForm } from '@/hooks/useCreateForm'
+import useSections from '@/hooks/useSections'
+import useCreateForm from '@/hooks/useCreateForm'
 import SectionList from '@/components/SectionList'
 import AddSection from '@/components/AddSection'
 import Loader from '@/components/Loader'
