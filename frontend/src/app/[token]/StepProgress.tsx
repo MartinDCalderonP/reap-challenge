@@ -7,8 +7,8 @@ interface StepProgressProps {
 
 const StepProgress = ({ steps, currentStep }: StepProgressProps) => (
   <nav className='flex justify-center items-center mb-10 mt-2'>
-    {steps.map((step, index) => (
-      <div key={step.title} className='flex items-center'>
+    {steps.map(({ title, subtitle }, index) => (
+      <div key={title} className='flex items-center'>
         <div className='flex flex-col items-center min-w-[160px]'>
           <div
             className={`w-6 h-6 rounded-full border-2 flex items-center justify-center mb-1 ${
@@ -30,10 +30,10 @@ const StepProgress = ({ steps, currentStep }: StepProgressProps) => (
                 : 'text-gray-700'
             }`}
           >
-            {step.title}
+            {title}
           </span>
           <span className='text-xs text-gray-400 text-center mt-0.5'>
-            {step.subtitle}
+            {subtitle}
           </span>
         </div>
         {index < steps.length - 1 && (

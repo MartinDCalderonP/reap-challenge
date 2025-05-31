@@ -1,4 +1,6 @@
 import type { Section } from '@/types'
+import Input from '@/components/Input'
+import Button from '@/components/Button'
 
 interface SectionFormProps {
   section: Section
@@ -61,9 +63,9 @@ const SectionForm = ({
               <label className='block font-medium mb-1 text-gray-700'>
                 {field.label}
               </label>
-              <input
+              <Input
                 type={field.type === 'NUMBER' ? 'number' : 'text'}
-                className='w-full border border-gray-300 rounded px-3 py-2 bg-gray-50 text-base text-black'
+                className='w-full bg-gray-50 text-base text-black'
                 value={values[`${section.order}-${index}`] ?? ''}
                 onChange={(event) =>
                   onChange(`${section.order}-${index}`, event.target.value)
@@ -76,20 +78,18 @@ const SectionForm = ({
         </div>
       </form>
       <div className='flex justify-between gap-4 mt-4'>
-        {buttons.map((button) => (
-          <button
-            key={button.label}
+        {buttons.map(({ label, disabled, onClick }) => (
+          <Button
+            key={label}
             type='button'
-            className={`cursor-pointer w-full px-8 py-2 rounded text-lg font-semibold ${
-              button.disabled
-                ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                : `${button.bgColor} ${button.hoverBgColor} text-white`
-            }`}
-            onClick={button.onClick}
-            disabled={button.disabled}
+            className='w-full'
+            color={label === 'Back' ? 'gray' : 'primary'}
+            disabled={disabled}
+            onClick={onClick}
+            fullWidth
           >
-            {button.label}
-          </button>
+            {label}
+          </Button>
         ))}
       </div>
     </>

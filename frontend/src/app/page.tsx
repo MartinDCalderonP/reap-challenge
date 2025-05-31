@@ -57,8 +57,8 @@ const AdminLoginPage = () => {
         </h1>
 
         <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
-          {formInputs.map((input) => (
-            <Input key={input.name} {...input} />
+          {formInputs.map(({ name, ...input }) => (
+            <Input key={name} name={name} {...input} />
           ))}
 
           <Button

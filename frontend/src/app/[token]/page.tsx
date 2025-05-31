@@ -52,9 +52,9 @@ const PublicFormPage = ({ params }: { params: Promise<{ token: string }> }) => {
   if (!form) return null
 
   const section = form.sections[step]
-  const steps = form.sections.map((section) => ({
-    title: section.title,
-    subtitle: section.fields.map((field) => field.label).join(', ')
+  const steps = form.sections.map(({ title, fields }) => ({
+    title,
+    subtitle: fields.map(({ label }) => label).join(', ')
   }))
 
   return (
